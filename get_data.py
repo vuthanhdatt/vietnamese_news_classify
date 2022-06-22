@@ -24,8 +24,8 @@ if __name__ == '__main__':
 
     titles = []
     cate = []
-    start_date = date(2022, 6, 10)
-    end_date = date(2022, 6, 21)
+    start_date = date(2021, 6, 20)
+    end_date = date(2022, 6, 20)
     category_id = {
         'Thế giới': '1001002',
         'Thời sự': '1001005',
