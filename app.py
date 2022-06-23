@@ -36,7 +36,7 @@ class Predict(object):
 
         return np.vstack(y_probs)
 
-class TransformerTextDataset(torch.utils.data.Dataset):
+class DataLoader(torch.utils.data.Dataset):
     def __init__(self, ids, masks, targets):
         self.ids = ids
         self.masks = masks
@@ -90,14 +90,6 @@ class LabelEncoder(object):
     def __str__(self):
         return f"<LabelEncoder(num_classes={len(self)})>"
 
-    def fit(self, y):
-        classes = np.unique(y)
-        for i, class_ in enumerate(classes):
-            self.class_to_index[class_] = i
-        self.index_to_class = {v: k for k, v in self.class_to_index.items()}
-        self.classes = list(self.class_to_index.keys())
-        return self
-
     def encode(self, y):
         y_one_hot = np.zeros((len(y), len(self.class_to_index)), dtype=int)
         for i, item in enumerate(y):
@@ -111,14 +103,9 @@ class LabelEncoder(object):
             classes.append(self.index_to_class[index])
         return classes
 
-    def save(self, fp):
-        with open(fp, "w") as fp:
-            contents = {'class_to_index': self.class_to_index}
-            json.dump(contents, fp, indent=4, sort_keys=False)
-
     @classmethod
     def load(cls, fp):
-        with open(fp, "r") as fp:
+        with open(fp, "r", encoding='utf-8') as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 
@@ -157,7 +144,7 @@ def predict_label():
         ids = encoded_input["input_ids"]
         masks = encoded_input["attention_mask"]
         y_filler = le.encode([le.classes[0]]*len(ids))
-        dataset = TransformerTextDataset(ids=ids, masks=masks, targets=y_filler)
+        dataset = DataLoader(ids=ids, masks=masks, targets=y_filler)
         dataloader = dataset.create_dataloader(batch_size=128)
         y_prob = predict_model.predict(dataloader)
         y_pred = np.argmax(y_prob, axis=1)
