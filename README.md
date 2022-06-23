@@ -35,7 +35,7 @@ python3 app.py
 
 You can also interact with the result in `predict.ipynb` notebook.
 
-## How to this project was created
+## How this project was created
 
 This project fine tunning PhoBERT pretrained model to classify Vietnamese news and trained with over 42,000 titles in 5 categories from VnExpress.
 
