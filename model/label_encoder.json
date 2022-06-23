@@ -1,9 +1,9 @@
 {
     "class_to_index": {
         "Kinh doanh": 0,
-        "S\u1ee9c kh\u1ecfe": 1,
-        "Th\u1ebf gi\u1edbi": 2,
-        "Th\u1ec3 thao": 3,
-        "Th\u1eddi s\u1ef1": 4
+            "Sức khỏe": 1,
+            "Thế giới": 2,
+            "Thể thao": 3,
+            "Thời sự": 4
     }
 }
