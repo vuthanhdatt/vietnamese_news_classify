@@ -1,4 +1,4 @@
-# Vietnamese news classification with fine tunning PhoBERT pretrained model
+# Vietnamese news classification with fine tuning PhoBERT pretrained model
 
 ***
 
